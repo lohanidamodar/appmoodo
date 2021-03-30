@@ -1,8 +1,10 @@
+import 'package:appmoodo/res/app_colors.dart';
 import 'package:appmoodo/service/api_service.dart';
 import 'package:appmoodo/state/state.dart';
 import 'package:appmoodo/ui/pages/home.dart';
 import 'package:appmoodo/ui/pages/login.dart';
 import 'package:appmoodo/ui/pages/profile.dart';
+import 'package:appmoodo/ui/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,7 +39,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: AppColors.primaryColor,
+        primarySwatch: Colors.pink,
       ),
       home: AuthChecker(),
       onGenerateRoute: (settings) {
@@ -45,8 +48,8 @@ class _MyAppState extends State<MyApp> {
           switch (settings.name) {
             case 'login':
               return LoginPage();
-            // case 'signup':
-            //   return SignupPage();
+            case 'signup':
+              return SignupPage();
             case 'profile':
               return ProfilePage();
             case 'chat':

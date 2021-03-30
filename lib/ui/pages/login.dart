@@ -39,10 +39,9 @@ class LoginPage extends ConsumerWidget {
           SafeArea(
             child: ListView(
               children: [
-                const SizedBox(height: 40.0),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 8.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32.0, vertical: 0),
                   child: SvgPicture.asset(Assets.logo, color: Colors.white),
                 ),
                 Text(
@@ -52,7 +51,7 @@ class LoginPage extends ConsumerWidget {
                         color: Colors.white,
                       ),
                 ),
-                const SizedBox(height: 30.0),
+                const SizedBox(height: 20.0),
                 Card(
                   margin: const EdgeInsets.all(32.0),
                   shape: RoundedRectangleBorder(
@@ -72,7 +71,7 @@ class LoginPage extends ConsumerWidget {
                               color: Colors.red,
                             ),
                       ),
-                      const SizedBox(height: 40.0),
+                      const SizedBox(height: 20.0),
                       TextField(
                         controller: watch(emailControllerProvider),
                         decoration: InputDecoration(
@@ -108,14 +107,16 @@ class LoginPage extends ConsumerWidget {
                       const SizedBox(height: 10.0),
                       TextButton(
                         child: Text(
-                          "Forgot Password?",
+                          "New user? Register",
                           style: TextStyle(
                             fontSize: 20.0,
-                            color: Colors.red,
+                            color: AppColors.primaryColor,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'signup');
+                        },
                       ),
                       const SizedBox(height: 20.0),
                     ],

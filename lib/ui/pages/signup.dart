@@ -1,3 +1,4 @@
+import 'package:appmoodo/res/app_colors.dart';
 import 'package:appmoodo/res/assets.dart';
 import 'package:appmoodo/service/api_service.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,6 @@ class SignupPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       extendBodyBehindAppBar: true,
       body: Stack(
         fit: StackFit.expand,
@@ -29,7 +26,7 @@ class SignupPage extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Card(
-                    color: Colors.red,
+                    color: AppColors.primaryColor,
                     margin: const EdgeInsets.all(0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0),
@@ -44,10 +41,9 @@ class SignupPage extends ConsumerWidget {
           SafeArea(
             child: ListView(
               children: [
-                const SizedBox(height: 40.0),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 8.0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32.0, vertical: 0),
                   child: SvgPicture.asset(Assets.logo, color: Colors.white),
                 ),
                 Text(
@@ -57,7 +53,7 @@ class SignupPage extends ConsumerWidget {
                         color: Colors.white,
                       ),
                 ),
-                const SizedBox(height: 30.0),
+                const SizedBox(height: 10.0),
                 Card(
                   margin: const EdgeInsets.all(32.0),
                   shape: RoundedRectangleBorder(
@@ -77,7 +73,7 @@ class SignupPage extends ConsumerWidget {
                               color: Colors.red,
                             ),
                       ),
-                      const SizedBox(height: 40.0),
+                      const SizedBox(height: 20.0),
                       TextField(
                         controller: watch(nameControllerProvider),
                         decoration: InputDecoration(
@@ -117,17 +113,18 @@ class SignupPage extends ConsumerWidget {
                           padding: const EdgeInsets.all(16.0),
                         ),
                       ),
-                      const SizedBox(height: 10.0),
                       TextButton(
                         child: Text(
-                          "Forgot Password?",
+                          "< Back",
                           style: TextStyle(
                             fontSize: 20.0,
-                            color: Colors.red,
+                            color: AppColors.primaryColor,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
                       const SizedBox(height: 20.0),
                     ],
