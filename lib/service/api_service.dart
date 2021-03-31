@@ -1,3 +1,4 @@
+import 'package:appmoodo/model/mood.dart';
 import 'package:appmoodo/model/user.dart';
 import 'package:appmoodo/res/app_constants.dart';
 import 'package:appwrite/appwrite.dart';
@@ -62,4 +63,37 @@ class ApiService {
       return null;
     }
   }
+
+  Future<Mood> addMood({
+    Map<String, dynamic> data,
+    List<String> read,
+    List<String> write,
+  }) async {
+    try {
+      final res = await db.createDocument(
+        collectionId: AppConstants.entriesCollection,
+        data: data,
+        read: read,
+        write: write,
+      );
+      return Mood.fromMap(res.data);
+    } on AppwriteException catch (e) {
+      print(e.message);
+      return null;
+    }
+  }
+
+  Future<List<Mood>> getMoods() async {
+    try {
+      final res =
+          await db.listDocuments(collectionId: AppConstants.entriesCollection);
+      return List<Map<String, dynamic>>.from(res.data['documents'])
+          .map((e) => Mood.fromMap(e))
+          .toList();
+    } on AppwriteException catch (e) {
+      print(e.message);
+      return [];
+    }
+  }
+
 }
