@@ -1,15 +1,17 @@
+import 'package:appmoodo/res/assets.dart';
 import 'package:appmoodo/service/api_service.dart';
 import 'package:appmoodo/state/state.dart';
+import 'package:appmoodo/ui/widgets/mood_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final moodProvider = StateProvider<double>((ref) => 1.0);
+final moodProvider = StateProvider<int>((ref) => 5);
 final contentControllerProvider = Provider((ref) => TextEditingController());
 
 class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final moodState = watch(moodProvider);
+    final mood = watch(moodProvider).state;
     watch(moodsFutureProvider);
     final moodEntries = watch(moodsProvider).state;
     return Scaffold(
@@ -23,14 +25,50 @@ class HomePage extends ConsumerWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20.0),
-          Slider(
-            value: moodState.state,
-            onChanged: (val) {
-              moodState.state = val;
-            },
-            min: 1.0,
-            max: 5.0,
-            divisions: 4,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MoodIcon(
+                isSelected:  mood == 5,
+                icon: AppAssets.awesome,
+                onTap: () {
+                  watch(moodProvider).state = 5;
+                },
+              ),
+              MoodIcon(
+                isSelected:  mood == 4,
+                icon: AppAssets.good,
+                onTap: () {
+                  watch(moodProvider).state = 4;
+                },
+              ),
+              MoodIcon(
+                isSelected:  mood == 3,
+                icon: AppAssets.meh,
+                onTap: () {
+                  watch(moodProvider).state = 3;
+                },
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MoodIcon(
+                isSelected:  mood == 2,
+                icon: AppAssets.bad,
+                onTap: () {
+                  watch(moodProvider).state = 2;
+                },
+              ),
+              MoodIcon(
+                isSelected:  mood == 1,
+                icon: AppAssets.awful,
+                onTap: () {
+                  watch(moodProvider).state = 1;
+                },
+              ),
+            ],
           ),
           const SizedBox(height: 10.0),
           TextField(

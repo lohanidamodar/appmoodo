@@ -42,7 +42,7 @@ class LoginPage extends ConsumerWidget {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 32.0, vertical: 0),
-                  child: SvgPicture.asset(Assets.logo, color: Colors.white),
+                  child: SvgPicture.asset(AppAssets.logo, color: Colors.white),
                 ),
                 Text(
                   "Moodo",
