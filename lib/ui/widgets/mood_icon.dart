@@ -27,7 +27,7 @@ class MoodIcon extends StatelessWidget {
   Material _buildIcon() {
     return Material(
       shape: CircleBorder(),
-      color: isSelected ? AppColors.primaryColor : Colors.transparent,
+      color: isSelected ? AppColors.primaryColor : Colors.grey.shade200,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         splashColor: AppColors.primaryColor,

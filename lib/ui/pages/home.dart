@@ -1,3 +1,5 @@
+import 'package:appmoodo/res/app_colors.dart';
+import 'package:appmoodo/res/app_constants.dart';
 import 'package:appmoodo/res/assets.dart';
 import 'package:appmoodo/service/api_service.dart';
 import 'package:appmoodo/state/state.dart';
@@ -5,8 +7,9 @@ import 'package:appmoodo/ui/widgets/mood_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final moodProvider = StateProvider<int>((ref) => 5);
-final contentControllerProvider = Provider((ref) => TextEditingController());
+final moodProvider = StateProvider.autoDispose<int>((ref) => 0);
+final contentControllerProvider =
+    Provider.autoDispose((ref) => TextEditingController());
 
 class HomePage extends ConsumerWidget {
   @override
@@ -15,7 +18,9 @@ class HomePage extends ConsumerWidget {
     watch(moodsFutureProvider);
     final moodEntries = watch(moodsProvider).state;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(AppConstants.appName),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
@@ -29,21 +34,21 @@ class HomePage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MoodIcon(
-                isSelected:  mood == 5,
+                isSelected: mood == 5,
                 icon: AppAssets.awesome,
                 onTap: () {
                   watch(moodProvider).state = 5;
                 },
               ),
               MoodIcon(
-                isSelected:  mood == 4,
+                isSelected: mood == 4,
                 icon: AppAssets.good,
                 onTap: () {
                   watch(moodProvider).state = 4;
                 },
               ),
               MoodIcon(
-                isSelected:  mood == 3,
+                isSelected: mood == 3,
                 icon: AppAssets.meh,
                 onTap: () {
                   watch(moodProvider).state = 3;
@@ -55,14 +60,14 @@ class HomePage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MoodIcon(
-                isSelected:  mood == 2,
+                isSelected: mood == 2,
                 icon: AppAssets.bad,
                 onTap: () {
                   watch(moodProvider).state = 2;
                 },
               ),
               MoodIcon(
-                isSelected:  mood == 1,
+                isSelected: mood == 1,
                 icon: AppAssets.awful,
                 onTap: () {
                   watch(moodProvider).state = 1;
@@ -98,13 +103,46 @@ class HomePage extends ConsumerWidget {
                   cp.state = moods;
                 }
                 context.read(contentControllerProvider).clear();
+                context.read(moodProvider).state = 0;
               },
             ),
           ),
-          ...moodEntries.map((mood) => ListTile(
-                title: Text(mood.content ?? mood.mood.toString()),
-              ))
+          ...moodEntries.map(
+            (mood) => ListTile(
+              title: Text(mood.content ?? mood.mood.toString()),
+              subtitle: Text(mood.date.toString()),
+              leading: Text("${mood.mood}"),
+            ),
+          )
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+        items: [
+          BottomNavigationBarItem(
+            label: "Home",
+            icon: Icon(Icons.home),
+            activeIcon: Icon(
+              Icons.home,
+              color: AppColors.primaryColor,
+            ),
+          ),
+          BottomNavigationBarItem(
+            label: "History",
+            icon: Icon(Icons.history),
+            activeIcon: Icon(
+              Icons.history,
+              color: AppColors.primaryColor,
+            ),
+          ),
+        ],
+      ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        child: Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }

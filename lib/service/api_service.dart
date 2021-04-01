@@ -85,8 +85,11 @@ class ApiService {
 
   Future<List<Mood>> getMoods() async {
     try {
-      final res =
-          await db.listDocuments(collectionId: AppConstants.entriesCollection);
+      final res = await db.listDocuments(
+        collectionId: AppConstants.entriesCollection,
+        orderField: 'date',
+        orderType: OrderType.desc,
+      );
       return List<Map<String, dynamic>>.from(res.data['documents'])
           .map((e) => Mood.fromMap(e))
           .toList();
@@ -95,5 +98,4 @@ class ApiService {
       return [];
     }
   }
-
 }

@@ -37,10 +37,23 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'AppMoodo',
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
         primarySwatch: Colors.pink,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          textTheme: TextTheme(
+            headline6: TextStyle(
+              inherit: true,
+              fontWeight: FontWeight.bold,
+              fontSize: 18.0,
+              color: AppColors.primaryColor,
+            ),
+          ),
+        ),
       ),
       home: AuthChecker(),
       onGenerateRoute: (settings) {
