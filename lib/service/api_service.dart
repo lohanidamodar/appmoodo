@@ -98,4 +98,26 @@ class ApiService {
       return [];
     }
   }
+
+  Future<List<Mood>> getMoodsDay({DateTime date}) async {
+    date = date ?? DateTime.now();
+
+    try {
+      final res = await db.listDocuments(
+        collectionId: AppConstants.entriesCollection,
+        orderField: 'date',
+        orderType: OrderType.desc,
+        filters: [
+          'date>=${DateTime(date.year, date.month, date.day, 0).millisecondsSinceEpoch}',
+          'date<=${DateTime(date.year, date.month, date.day+1, 0).millisecondsSinceEpoch}',
+        ],
+      );
+      return List<Map<String, dynamic>>.from(res.data['documents'])
+          .map((e) => Mood.fromMap(e))
+          .toList();
+    } on AppwriteException catch (e) {
+      print(e.message);
+      return [];
+    }
+  }
 }
