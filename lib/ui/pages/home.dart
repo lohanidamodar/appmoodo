@@ -29,7 +29,7 @@ class HomePage extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
-          if (moodEntries.length < 1) ...[
+          if (moodEntries.length < 5) ...[
             Text(
               "How are you feeling?",
               style: Theme.of(context).textTheme.headline3,
@@ -42,6 +42,7 @@ class HomePage extends ConsumerWidget {
                 MoodIcon(
                   isSelected: mood == 5,
                   icon: AppAssets.awesome,
+                  emoji: "😄",
                   onTap: () {
                     watch(moodProvider).state = 5;
                   },
@@ -49,6 +50,7 @@ class HomePage extends ConsumerWidget {
                 MoodIcon(
                   isSelected: mood == 4,
                   icon: AppAssets.good,
+                  emoji: "🙂",
                   onTap: () {
                     watch(moodProvider).state = 4;
                   },
@@ -56,6 +58,7 @@ class HomePage extends ConsumerWidget {
                 MoodIcon(
                   isSelected: mood == 3,
                   icon: AppAssets.meh,
+                  emoji: "😐",
                   onTap: () {
                     watch(moodProvider).state = 3;
                   },
@@ -68,6 +71,7 @@ class HomePage extends ConsumerWidget {
                 MoodIcon(
                   isSelected: mood == 2,
                   icon: AppAssets.bad,
+                  emoji: "🙁",
                   onTap: () {
                     watch(moodProvider).state = 2;
                   },
@@ -75,6 +79,7 @@ class HomePage extends ConsumerWidget {
                 MoodIcon(
                   isSelected: mood == 1,
                   icon: AppAssets.awful,
+                  emoji: "😩",
                   onTap: () {
                     watch(moodProvider).state = 1;
                   },
