@@ -1,15 +1,9 @@
 import 'package:appmoodo/res/app_colors.dart';
 import 'package:appmoodo/res/app_constants.dart';
-import 'package:appmoodo/res/assets.dart';
-import 'package:appmoodo/service/api_service.dart';
 import 'package:appmoodo/state/state.dart';
-import 'package:appmoodo/ui/widgets/mood_icon.dart';
+import 'package:appmoodo/ui/widgets/add_mood.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final moodProvider = StateProvider.autoDispose<int>((ref) => 0);
-final contentControllerProvider =
-    Provider.autoDispose((ref) => TextEditingController());
 
 class HomePage extends ConsumerWidget {
   @override
@@ -20,7 +14,6 @@ class HomePage extends ConsumerWidget {
       today.month,
       today.day,
     );
-    final mood = watch(moodProvider).state;
     final moodEntries = watch(dayMoodsProvider(today)).state;
     return Scaffold(
       appBar: AppBar(
@@ -29,95 +22,8 @@ class HomePage extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
-          if (moodEntries.length < 5) ...[
-            Text(
-              "How are you feeling?",
-              style: Theme.of(context).textTheme.headline3,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MoodIcon(
-                  isSelected: mood == 5,
-                  icon: AppAssets.awesome,
-                  emoji: "😄",
-                  onTap: () {
-                    watch(moodProvider).state = 5;
-                  },
-                ),
-                MoodIcon(
-                  isSelected: mood == 4,
-                  icon: AppAssets.good,
-                  emoji: "🙂",
-                  onTap: () {
-                    watch(moodProvider).state = 4;
-                  },
-                ),
-                MoodIcon(
-                  isSelected: mood == 3,
-                  icon: AppAssets.meh,
-                  emoji: "😐",
-                  onTap: () {
-                    watch(moodProvider).state = 3;
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MoodIcon(
-                  isSelected: mood == 2,
-                  icon: AppAssets.bad,
-                  emoji: "🙁",
-                  onTap: () {
-                    watch(moodProvider).state = 2;
-                  },
-                ),
-                MoodIcon(
-                  isSelected: mood == 1,
-                  icon: AppAssets.awful,
-                  emoji: "😩",
-                  onTap: () {
-                    watch(moodProvider).state = 1;
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 10.0),
-            TextField(
-              controller: watch(contentControllerProvider),
-              decoration: InputDecoration(hintText: "Note"),
-              maxLines: 3,
-            ),
-            const SizedBox(height: 10.0),
-            Center(
-              child: ElevatedButton(
-                child: Text("Submit"),
-                onPressed: () async {
-                  String userid = context.read(userProvider).state.id;
-                  final mood = await ApiService.instance.addMood(
-                    data: {
-                      "mood": context.read(moodProvider).state,
-                      "date": DateTime.now().millisecondsSinceEpoch,
-                      "content": context.read(contentControllerProvider).text,
-                    },
-                    read: ['user:$userid'],
-                    write: ['user:$userid'],
-                  );
-                  if (mood != null) {
-                    final cp = context.read(moodsProvider);
-                    final moods = cp.state;
-                    moods.add(mood);
-                    cp.state = moods;
-                  }
-                  context.read(contentControllerProvider).clear();
-                  context.read(moodProvider).state = 0;
-                },
-              ),
-            ),
+          if (moodEntries.length < 1) ...[
+            AddMood(),
           ],
           ...moodEntries.map(
             (mood) => ListTile(
@@ -154,7 +60,7 @@ class HomePage extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         elevation: 0,
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, 'add'),
       ),
     );
   }

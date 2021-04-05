@@ -1,12 +1,15 @@
 import 'package:appmoodo/res/app_colors.dart';
 import 'package:appmoodo/service/api_service.dart';
 import 'package:appmoodo/state/state.dart';
+import 'package:appmoodo/ui/pages/add.dart';
 import 'package:appmoodo/ui/pages/home.dart';
 import 'package:appmoodo/ui/pages/login.dart';
 import 'package:appmoodo/ui/pages/profile.dart';
 import 'package:appmoodo/ui/pages/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'res/app_colors.dart';
 
 void main() {
   runApp(ProviderScope(
@@ -45,6 +48,9 @@ class _MyAppState extends State<MyApp> {
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           elevation: 0,
+          iconTheme: IconThemeData(
+            color: AppColors.primaryColor,
+          ),
           textTheme: TextTheme(
             headline6: TextStyle(
               inherit: true,
@@ -63,6 +69,8 @@ class _MyAppState extends State<MyApp> {
               return LoginPage();
             case 'signup':
               return SignupPage();
+            case 'add':
+              return AddMoodPage();
             case 'profile':
               return ProfilePage();
             case 'chat':
