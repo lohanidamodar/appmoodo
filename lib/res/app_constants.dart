@@ -4,4 +4,7 @@ class AppConstants {
   static const String entriesCollection = '6062e1135ab83';
 
   static String appName = "AppMoodo";
+  static List<String> moodMojis = ["😩", "🙁", "😐", "🙂", "😄"];
+  static List<String> moodNames = ["awful", "bad", "meh", "good", "rad"];
+
 }

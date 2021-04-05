@@ -10,9 +10,12 @@ dependencies:
   flutter:
     sdk: flutter
   appwrite: ^0.4.0
+  charts_flutter: ^0.10.0
   cupertino_icons: ^1.0.2
+  fl_chart: ^0.35.0
   flutter_riverpod: ^0.13.1+1
   flutter_svg: ^0.19.3
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
