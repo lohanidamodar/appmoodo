@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../res/assets.dart';
 import '../../service/api_service.dart';
-import '../../state/state.dart';
 import '../../state/state.dart';
 import 'mood_icon.dart';
 
@@ -29,7 +26,6 @@ class AddMood extends ConsumerWidget {
           children: [
             MoodIcon(
               isSelected: mood == 5,
-              icon: AppAssets.awesome,
               emoji: "😄",
               onTap: () {
                 watch(moodProvider).state = 5;
@@ -37,7 +33,6 @@ class AddMood extends ConsumerWidget {
             ),
             MoodIcon(
               isSelected: mood == 4,
-              icon: AppAssets.good,
               emoji: "🙂",
               onTap: () {
                 watch(moodProvider).state = 4;
@@ -45,7 +40,6 @@ class AddMood extends ConsumerWidget {
             ),
             MoodIcon(
               isSelected: mood == 3,
-              icon: AppAssets.meh,
               emoji: "😐",
               onTap: () {
                 watch(moodProvider).state = 3;
@@ -58,7 +52,6 @@ class AddMood extends ConsumerWidget {
           children: [
             MoodIcon(
               isSelected: mood == 2,
-              icon: AppAssets.bad,
               emoji: "🙁",
               onTap: () {
                 watch(moodProvider).state = 2;
@@ -66,7 +59,6 @@ class AddMood extends ConsumerWidget {
             ),
             MoodIcon(
               isSelected: mood == 1,
-              icon: AppAssets.awful,
               emoji: "😩",
               onTap: () {
                 watch(moodProvider).state = 1;
@@ -97,12 +89,7 @@ class AddMood extends ConsumerWidget {
               );
               if (mood != null) {
                 var today = DateTime.now();
-                today = DateTime(
-                  today.year,
-                  today.month,
-                  today.day,
-                );
-                final cp = context.read(dayMoodsProvider(today));
+                final cp = context.read(monthMoodsProvider(today));
                 final moods = cp.state;
                 moods.insert(0, mood);
                 cp.state = moods;

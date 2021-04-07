@@ -15,6 +15,15 @@ final dayMoodsProvider =
       .when(data: (moods) => moods, loading: () => [], error: (_, __) => []);
 });
 
+final _monthMoodsFutureProvider = FutureProvider.family<List<Mood>, DateTime>(
+    (ref, date) => ApiService.instance.getMoodsMonth(date: date));
+final monthMoodsProvider =
+    StateProvider.family<List<Mood>, DateTime>((ref, date) {
+  return ref
+      .watch(_monthMoodsFutureProvider(date))
+      .when(data: (moods) => moods, loading: () => [], error: (_, __) => []);
+});
+
 final moodsProvider = StateProvider<List<Mood>>((ref) => []);
 final moodsFutureProvider = FutureProvider<List<Mood>>((ref) async {
   final ch = await ApiService.instance.getMoods();

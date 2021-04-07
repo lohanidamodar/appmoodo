@@ -46,6 +46,12 @@ class MoodListItem extends StatelessWidget {
                           )),
                     ]),
                   ),
+                  if (mood.content.isNotEmpty) ...[
+                    const SizedBox(height: 5.0),
+                    Text(
+                      mood.content,
+                    ),
+                  ],
                 ],
               ),
             ),

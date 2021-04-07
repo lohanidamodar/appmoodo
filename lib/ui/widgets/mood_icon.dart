@@ -3,18 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MoodIcon extends StatelessWidget {
-  final String icon;
   final Function() onTap;
   final bool isExpanded;
   final bool isSelected;
   final String emoji;
   const MoodIcon({
     Key key,
-    @required this.icon,
+    @required this.emoji,
     this.onTap,
     this.isExpanded = false,
     this.isSelected = false,
-    this.emoji,
   }) : super(key: key);
 
   @override
@@ -39,12 +37,11 @@ class MoodIcon extends StatelessWidget {
             vertical: 12.0,
             horizontal: 12.0,
           ),
-          child: emoji != null ? Text(emoji, style: TextStyle(
-            fontSize: 70,
-          ),) :  SvgPicture.asset(
-            icon,
-            fit: BoxFit.contain,
-            alignment: Alignment.center,
+          child: Text(
+            emoji,
+            style: TextStyle(
+              fontSize: 70,
+            ),
           ),
         ),
       ),
