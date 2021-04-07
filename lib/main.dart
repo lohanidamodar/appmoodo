@@ -6,6 +6,7 @@ import 'package:appmoodo/ui/pages/home.dart';
 import 'package:appmoodo/ui/pages/login.dart';
 import 'package:appmoodo/ui/pages/profile.dart';
 import 'package:appmoodo/ui/pages/signup.dart';
+import 'package:appmoodo/ui/pages/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,16 +25,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _getUser();
   }
 
   _getUser() async {
+    await Future.delayed(Duration.zero);
+    context.read(authStateProvider).state = AuthStatus.authenticating;
     final user = await ApiService.instance.getUser();
     if (user != null) {
       context.read(userProvider).state = user;
-      context.read(isLoggedInProvider).state = true;
+      context.read(authStateProvider).state = AuthStatus.authenticated;
+    } else {
+      context.read(authStateProvider).state = AuthStatus.unauthenticated;
     }
   }
 
@@ -86,7 +91,12 @@ class _MyAppState extends State<MyApp> {
 class AuthChecker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final isLoggedIn = watch(isLoggedInProvider).state;
-    return isLoggedIn ? HomePage() : LoginPage();
+    final authStatus = watch(authStateProvider).state;
+    return authStatus == AuthStatus.authenticated
+        ? HomePage()
+        : authStatus == AuthStatus.authenticating ||
+                authStatus == AuthStatus.uninitialized
+            ? SplashScreen()
+            : LoginPage();
   }
 }

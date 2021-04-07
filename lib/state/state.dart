@@ -3,7 +3,16 @@ import 'package:appmoodo/model/user.dart';
 import 'package:appmoodo/service/api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final isLoggedInProvider = StateProvider<bool>((ref) => false);
+enum AuthStatus {
+  unauthenticated,
+  authenticating,
+  authenticated,
+  uninitialized
+}
+
+final authStateProvider =
+    StateProvider<AuthStatus>((ref) => AuthStatus.uninitialized);
+
 final userProvider = StateProvider<User>((ref) => null);
 
 final _dayMoodsFutureProvider = FutureProvider.family<List<Mood>, DateTime>(

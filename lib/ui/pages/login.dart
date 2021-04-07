@@ -89,6 +89,8 @@ class LoginPage extends ConsumerWidget {
                       ElevatedButton(
                         child: Text("Login"),
                         onPressed: () async {
+                          context.read(authStateProvider).state =
+                              AuthStatus.authenticating;
                           final loggedIn = await ApiService.instance.login(
                               email: context.read(emailControllerProvider).text,
                               password: context
@@ -97,7 +99,8 @@ class LoginPage extends ConsumerWidget {
                           if (loggedIn) {
                             final user = await ApiService.instance.getUser();
                             context.read(userProvider).state = user;
-                            context.read(isLoggedInProvider).state = true;
+                            context.read(authStateProvider).state =
+                                AuthStatus.authenticated;
                           }
                         },
                         style: ElevatedButton.styleFrom(

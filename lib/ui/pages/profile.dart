@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             onTap: () async {
               await ApiService.instance.logout();
-              context.read(isLoggedInProvider).state = false;
+              context.read(authStateProvider).state = AuthStatus.unauthenticated;
               context.read(userProvider).state = null;
               Navigator.pop(context);
             },
