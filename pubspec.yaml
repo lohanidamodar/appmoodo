@@ -15,6 +15,7 @@ dependencies:
   fl_chart: ^0.35.0
   flutter_riverpod: ^0.14.0+1
   flutter_svg: ^0.21.0+1
+  intl: ^0.17.0
 
 dependency_overrides:
   appwrite:

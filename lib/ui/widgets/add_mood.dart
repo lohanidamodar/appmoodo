@@ -4,7 +4,8 @@ import '../../service/api_service.dart';
 import '../../state/state.dart';
 import 'mood_icon.dart';
 
-final AutoDisposeStateProvider<int>? moodProvider = StateProvider.autoDispose<int>((ref) => 0);
+final AutoDisposeStateProvider<int>? moodProvider =
+    StateProvider.autoDispose<int>((ref) => 0);
 final AutoDisposeProvider<TextEditingController>? contentControllerProvider =
     Provider.autoDispose((ref) => TextEditingController());
 
@@ -89,6 +90,11 @@ class AddMood extends ConsumerWidget {
               );
               if (mood != null) {
                 var today = DateTime.now();
+                today = DateTime(
+                  today.year,
+                  today.month,
+                  today.day,
+                );
                 final cp = context.read(monthMoodsProvider!(today));
                 final moods = cp.state;
                 moods.insert(0, mood);
