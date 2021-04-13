@@ -3,15 +3,15 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class User {
-  final String? id;
-  final String? name;
-  final String? email;
-  final Map<String, dynamic>? prefs;
+  final String id;
+  final String name;
+  final String email;
+  final Map<String, dynamic> prefs;
   User({
-    this.id,
-    this.name,
-    this.email,
-    this.prefs,
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.prefs,
   });
 
   User copyWith({

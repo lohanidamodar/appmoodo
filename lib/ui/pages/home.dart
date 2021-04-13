@@ -20,6 +20,14 @@ class HomePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppConstants.appName),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              Navigator.pushNamed(context, 'profile');
+            },
+          )
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 70.0),
