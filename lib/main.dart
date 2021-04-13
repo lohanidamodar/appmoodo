@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
   _getUser() async {
     await Future.delayed(Duration.zero);
     context.read(authStateProvider).state = AuthStatus.authenticating;
-    final user = await ApiService.instance.getUser();
+    final user = await ApiService.instance!.getUser();
     if (user != null) {
       context.read(userProvider).state = user;
       context.read(authStateProvider).state = AuthStatus.authenticated;

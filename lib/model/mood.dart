@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 class Mood {
-  final String id;
-  final String content;
-  final int mood;
-  final DateTime date;
+  final String? id;
+  final String? content;
+  final int? mood;
+  final DateTime? date;
   Mood({
     this.id,
     this.content,
@@ -13,10 +13,10 @@ class Mood {
   });
 
   Mood copyWith({
-    String id,
-    String content,
-    int mood,
-    DateTime date,
+    String? id,
+    String? content,
+    int? mood,
+    DateTime? date,
   }) {
     return Mood(
       id: id ?? this.id,
@@ -30,7 +30,7 @@ class Mood {
     return {
       'content': content,
       'mood': mood,
-      'date': date.millisecondsSinceEpoch,
+      'date': date!.millisecondsSinceEpoch,
     };
   }
 

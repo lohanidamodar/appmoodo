@@ -16,7 +16,7 @@ class HomePage extends ConsumerWidget {
       today.month,
       today.day,
     );
-    final moodEntries = watch(monthMoodsProvider(today)).state;
+    final moodEntries = watch(monthMoodsProvider!(today)).state;
     return Scaffold(
       appBar: AppBar(
         title: Text(AppConstants.appName),

@@ -49,7 +49,7 @@ class SignupPage extends ConsumerWidget {
                 Text(
                   "Moodo",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline3.copyWith(
+                  style: Theme.of(context).textTheme.headline3!.copyWith(
                         color: Colors.white,
                       ),
                 ),
@@ -69,7 +69,7 @@ class SignupPage extends ConsumerWidget {
                       Text(
                         "Sign Up",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline5.copyWith(
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
                               color: Colors.red,
                             ),
                       ),
@@ -97,7 +97,7 @@ class SignupPage extends ConsumerWidget {
                       ElevatedButton(
                         child: Text("SUBMIT"),
                         onPressed: () async {
-                          final signedUp = await ApiService.instance.signup(
+                          final signedUp = await ApiService.instance!.signup(
                             name: context.read(nameControllerProvider).text,
                             email: context.read(emailControllerProvider).text,
                             password:

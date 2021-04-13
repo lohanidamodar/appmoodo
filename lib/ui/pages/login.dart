@@ -47,7 +47,7 @@ class LoginPage extends ConsumerWidget {
                 Text(
                   "Moodo",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline3.copyWith(
+                  style: Theme.of(context).textTheme.headline3!.copyWith(
                         color: Colors.white,
                       ),
                 ),
@@ -67,7 +67,7 @@ class LoginPage extends ConsumerWidget {
                       Text(
                         "Log In",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headline5.copyWith(
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
                               color: Colors.red,
                             ),
                       ),
@@ -91,13 +91,13 @@ class LoginPage extends ConsumerWidget {
                         onPressed: () async {
                           context.read(authStateProvider).state =
                               AuthStatus.authenticating;
-                          final loggedIn = await ApiService.instance.login(
+                          final loggedIn = await ApiService.instance!.login(
                               email: context.read(emailControllerProvider).text,
                               password: context
                                   .read(passwordControllerProvider)
                                   .text);
                           if (loggedIn) {
-                            final user = await ApiService.instance.getUser();
+                            final user = await ApiService.instance!.getUser();
                             context.read(userProvider).state = user;
                             context.read(authStateProvider).state =
                                 AuthStatus.authenticated;

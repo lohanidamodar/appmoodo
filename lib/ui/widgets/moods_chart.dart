@@ -4,9 +4,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class MoodsChart extends StatelessWidget {
-  final List<Mood> moods;
+  final List<Mood>? moods;
   final List<FlSpot> _data = [];
-  MoodsChart({Key key, this.moods}) : super(key: key);
+  MoodsChart({Key? key, this.moods}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -85,19 +85,19 @@ class MoodsChart extends StatelessWidget {
 
   List<FlSpot> _prepareData() {
     final Map<DateTime, List<Mood>> gmoods = {};
-    moods.forEach((mood) {
-      final date = _normalize(mood.date);
+    moods!.forEach((mood) {
+      final date = _normalize(mood.date!);
       if (gmoods[date] == null) gmoods[date] = [];
-      gmoods[date].add(mood);
+      gmoods[date]!.add(mood);
     });
 
     gmoods.keys.forEach((date) {
       var sum = 0;
-      gmoods[date].forEach((element) {
-        sum += element.mood;
+      gmoods[date]!.forEach((element) {
+        sum += element.mood!;
       });
       _data.add(
-          FlSpot(date.day.toDouble(), (sum ~/ gmoods[date].length).toDouble()));
+          FlSpot(date.day.toDouble(), (sum ~/ gmoods[date]!.length).toDouble()));
     });
     return _data;
   }

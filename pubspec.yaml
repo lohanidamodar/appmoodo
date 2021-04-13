@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -13,9 +13,14 @@ dependencies:
   charts_flutter: ^0.10.0
   cupertino_icons: ^1.0.2
   fl_chart: ^0.35.0
-  flutter_riverpod: ^0.13.1+1
-  flutter_svg: ^0.19.3
-  intl: ^0.17.0
+  flutter_riverpod: ^0.14.0+1
+  flutter_svg: ^0.21.0+1
+
+dependency_overrides:
+  appwrite:
+    git:
+      url: git@github.com:appwrite/sdk-for-flutter
+      ref: feat-null-safety-new
 
 dev_dependencies:
   flutter_test:

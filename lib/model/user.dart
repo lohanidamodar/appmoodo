@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class User {
-  final String id;
-  final String name;
-  final String email;
-  final Map<String, dynamic> prefs;
+  final String? id;
+  final String? name;
+  final String? email;
+  final Map<String, dynamic>? prefs;
   User({
     this.id,
     this.name,
@@ -15,10 +15,10 @@ class User {
   });
 
   User copyWith({
-    String id,
-    String name,
-    String email,
-    Map<String, dynamic> prefs,
+    String? id,
+    String? name,
+    String? email,
+    Map<String, dynamic>? prefs,
   }) {
     return User(
       id: id ?? this.id,
@@ -38,8 +38,6 @@ class User {
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
     return User(
       id: map['\$id'],
       name: map['name'],

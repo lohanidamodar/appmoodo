@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class MoodIcon extends StatelessWidget {
-  final Function() onTap;
+  final Function()? onTap;
   final bool isExpanded;
   final bool isSelected;
   final String emoji;
   const MoodIcon({
-    Key key,
-    @required this.emoji,
+    Key? key,
+    required this.emoji,
     this.onTap,
     this.isExpanded = false,
     this.isSelected = false,
